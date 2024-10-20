@@ -1,20 +1,39 @@
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, Pressable } from "react-native";
+import PropTypes from "prop-types";
 
 import styles from "./styles";
 
-const ImageOption = () => {
-  return (
-    <View style={styles.optionContainer}>
-      <Image
-        source={{
-          uri: "https://fsmd-assets.s3.eu-west-1.amazonaws.com/duolingo/images/cup.png",
-        }}
-        resizeMode="contain"
-        style={styles.optionImage}
-      />
-      <Text style={styles.optionText}>Glass</Text>
-    </View>
-  );
+const ImageOption = ({ image, text, isSelected, onPress }) => (
+  <Pressable
+    onPress={onPress}
+    style={[
+      styles.optionContainer,
+      isSelected ? styles.selectedContainer : {},
+    ]}>
+    <Image
+      source={{
+        uri: image,
+      }}
+      resizeMode="contain"
+      style={styles.optionImage}
+    />
+    <Text style={isSelected ? styles.selectedText : styles.optionText}>
+      {text}
+    </Text>
+  </Pressable>
+);
+
+ImageOption.prototype = {
+  image: PropTypes.string.isRequired,
+  text: PropTypes.string,
+  isSelected: PropTypes.bool,
+  onPress: PropTypes.func,
+};
+
+ImageOption.defaultProps = {
+  text: "Default",
+  isSelected: false,
+  onPress: () => {},
 };
 
 export default ImageOption;
