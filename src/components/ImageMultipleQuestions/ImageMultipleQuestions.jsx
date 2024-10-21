@@ -5,7 +5,6 @@ import ImageOption from "../ImageOption";
 import Button from "../Button";
 
 import styles from "./styles";
-import propTypes from "prop-types";
 
 const ImageMultipleQuestions = ({ question, onCorrect, onWrong }) => {
   const [selected, setSelected] = useState(null);
