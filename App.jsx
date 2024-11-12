@@ -4,6 +4,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import ImageMultipleQuestions from "./src/components/ImageMultipleQuestions";
 import OpenEndedQuestion from "./src/components/OpenEndedQuestions/OpenEndedQuestions";
+import FillInTheBlank from "./src/components/FillInTheBlank";
 
 import questions from "./assets/data/allQuestions";
 
@@ -92,6 +93,13 @@ const App = () => {
         progress={currentQuestionIndex / questions.length}
         lives={lives}
       />
+      {currentQuestion.type === "FILL_IN_THE_BLANK" ? (
+        <FillInTheBlank
+          question={currentQuestion}
+          onCorrect={onCorrect}
+          onWrong={onWrong}
+        />
+      ) : null}
       {currentQuestion.type === "IMAGE_MULTIPLE_CHOICE" && (
         <ImageMultipleQuestions
           question={currentQuestion}
